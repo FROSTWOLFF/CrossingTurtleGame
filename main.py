@@ -2,6 +2,8 @@ from turtle import Screen, Turtle
 from cars import Car, all_cars
 import time
 
+START_POS = (0, -280)
+
 
 def go_up():
     turtle.forward(10)
@@ -18,7 +20,7 @@ screen.onkeypress(go_up, "w")
 turtle = Turtle("turtle")
 turtle.penup()
 turtle.color("black")
-turtle.setpos(0, -280)
+turtle.setpos(START_POS)
 turtle.setheading(90)
 
 
@@ -33,6 +35,11 @@ while game_on:
 
     for car in all_cars:
         car.move()
+
+    if turtle.ycor() > 280:
+        Car.level_up()
+        # Car.reset()
+        turtle.setpos(START_POS)
 
     car_generate_counter += 1
     time.sleep(0.1)

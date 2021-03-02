@@ -4,7 +4,9 @@ import random
 
 COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
 START_X = 320
-CAR_SPEED = 10
+
+# globals
+car_speed = 10
 all_cars = []
 
 
@@ -15,6 +17,15 @@ class Car(Turtle):
         self.shapesize(stretch_wid=1, stretch_len=2)
         self.penup()
         self.setheading(180)
+
+    # @staticmethod
+    # def reset():
+    #     all_cars.clear()
+
+    @staticmethod
+    def level_up():
+        global car_speed
+        car_speed += 5
 
     @staticmethod
     def generate():
@@ -27,4 +38,4 @@ class Car(Turtle):
         all_cars.append(new_car)
 
     def move(self):
-        self.forward(CAR_SPEED)
+        self.forward(car_speed)
