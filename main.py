@@ -1,8 +1,10 @@
 from turtle import Screen, Turtle
 from cars import Car, all_cars
+from text import Text
 import time
 
 START_POS = (0, -280)
+LEVEL_TEXT_POS = (-240, 255)
 
 
 def go_up():
@@ -24,21 +26,26 @@ turtle.setpos(START_POS)
 turtle.setheading(90)
 
 
+text = Text(LEVEL_TEXT_POS)
+
+
 game_on = True
 car_generate_counter = 0
 while game_on:
     screen.update()
 
-    # Its to lower the times of the cars are generated.
+    # It's to lower the times of the cars that are generated.
     if car_generate_counter % 5 == 0:
         Car.generate()
 
     for car in all_cars:
         car.move()
 
+    # Level Passed
     if turtle.ycor() > 280:
         Car.level_up()
-        # Car.reset()
+        text.level_up()
+
         turtle.setpos(START_POS)
 
     car_generate_counter += 1
