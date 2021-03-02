@@ -11,6 +11,10 @@ def go_up():
     turtle.forward(10)
 
 
+# def game_over():
+#     text
+
+
 # Screen properties
 screen = Screen()
 screen.setup(width=600, height=600)
@@ -26,7 +30,8 @@ turtle.setpos(START_POS)
 turtle.setheading(90)
 
 
-text = Text(LEVEL_TEXT_POS)
+text_ins = Text(LEVEL_TEXT_POS)
+text_ins.update_level()
 
 
 game_on = True
@@ -41,10 +46,16 @@ while game_on:
     for car in all_cars:
         car.move()
 
+    for car in all_cars:
+        if car.distance(turtle.position()) < 22:
+            Text.game_over()
+            game_on = False
+            print("collided")
+
     # Level Passed
     if turtle.ycor() > 280:
         Car.level_up()
-        text.level_up()
+        text_ins.level_up()
 
         turtle.setpos(START_POS)
 
