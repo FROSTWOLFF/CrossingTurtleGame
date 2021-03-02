@@ -1,4 +1,6 @@
 from turtle import Screen, Turtle
+from cars import Car, all_cars
+import time
 
 
 def go_up():
@@ -19,9 +21,20 @@ turtle.color("black")
 turtle.setpos(0, -280)
 turtle.setheading(90)
 
+
 game_on = True
+car_generate_counter = 0
 while game_on:
     screen.update()
 
+    # Its to lower the times of the cars are generated.
+    if car_generate_counter % 5 == 0:
+        Car.generate()
+
+    for car in all_cars:
+        car.move()
+
+    car_generate_counter += 1
+    time.sleep(0.1)
 
 screen.mainloop()
